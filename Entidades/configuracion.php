@@ -100,9 +100,26 @@ class clsConfiguracionEntidad
         return $this->valoresCargados[$indice];
 
     }
-             
-           
 
+
+    public function desencriptarServidor ($value)
+    {
+        $this->Servidor =$this->objClsEncript->desencriptar(trim($value));
+    }
+    public function desencriptarBaseDatos ($value)
+    {
+        $this->Basedatos =$this->objClsEncript->desencriptar(trim($value));
+    }
+    public function desencriptarUsuario ($value)
+    {
+        $this->Usuario =$this->objClsEncript->desencriptar(trim($value));
+    }
+    public function desencriptarClave ($value)
+    {
+        $this->Clave =$this->objClsEncript->desencriptar(trim($value));
+    }
+             
+    
 }
 
 ?>

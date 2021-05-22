@@ -1,5 +1,5 @@
 <?php
-
+include_once('../Entidades/configuracion.php');
 class clsConfiguracion
 {
     private $Nombre = null, $ruta = null, $rutaCompleta = null;
@@ -9,8 +9,6 @@ class clsConfiguracion
         $this->ruta = '../dataacces/';
         $this->Nombre = 'config.txt';
         $this->generarRutaCompleta();
-        
-
     }
     private function generarRutaCompleta()
     {
@@ -21,28 +19,27 @@ class clsConfiguracion
     {
        if($this->validarExistenciaArchivo())
        {
-        echo '</br> El metodo dice que si';
+       
         $this->modificarArchivo ($objClassConfiguracionEntidad);
 
        }else{
-           echo '</br> El metodo dice que no';
+         
            $this->crearArchivo($objClassConfiguracionEntidad);
        }
-
+       //$this->leerConfiguracion();
     }
     private function validarExistenciaArchivo()
     {
         if (file_exists($this->rutaCompleta)) 
         {
-            echo 'El archivo: ' .$this->Nombre. 'existe en la ruta: '.$this->ruta;
+           // echo 'El archivo: ' .$this->Nombre. 'existe en la ruta: '.$this->ruta;
             return true;
             
         }else
         {
-            echo 'El archivo: ' .$this->Nombre. 'No existe en la ruta: '.$this->ruta;
+            //echo 'El archivo: ' .$this->Nombre. 'No existe en la ruta: '.$this->ruta;
             return false;
         }
-
     }
     private function crearArchivo($objClassConfiguracionEntidad)
     {
@@ -88,7 +85,74 @@ class clsConfiguracion
              fclose($archivo);         
          }
     }
-   
-}
+    public function leerConfiguracion ()
+    {
+        $Servidor = null;
+        $BaseDatos = null;
+        $Usuario = null;
+        $Clave = null;
 
+        $objClassConfiguracionEntidad = new clsConfiguracionEntidad();
+
+        $arrayLineaArchivo=file($this->rutaCompleta);
+        for ($j=0 ; $j < count($arrayLineaArchivo); $j++ ) 
+        {
+
+            $linea = $arrayLineaArchivo[$j];
+            $pos = strpos($linea, "Servidor");
+            if ($pos !== false) 
+            {
+            
+                $caracteres = preg_split('/:/', $linea, -1, PREG_SPLIT_NO_EMPTY);
+                if (count($caracteres)>= 2) 
+                {
+                    $objClassConfiguracionEntidad->desencriptarServidor($caracteres[1]);
+                
+                }               
+            }
+            else
+            {
+                $pos = strpos($linea, "Base de datos");
+                if ($pos !== false) 
+                {
+                    $caracteres = preg_split('/:/', $linea, -1, PREG_SPLIT_NO_EMPTY);
+                    if (count($caracteres)>= 2) 
+                    {
+                        $objClassConfiguracionEntidad->desencriptarBaseDatos($caracteres[1]);
+
+                    }
+                }
+                else{
+               
+                    $pos = strpos($linea, "Usuario");
+                    if ($pos !== false) 
+                    {
+                        $caracteres = preg_split('/:/', $linea, -1, PREG_SPLIT_NO_EMPTY);
+                        if (count($caracteres)>= 2) 
+                        {
+                            $objClassConfiguracionEntidad->desencriptarUsuario($caracteres[1]);
+
+                        }
+        
+                    
+                    }else {
+               
+                        $pos = strpos($linea, "Clave");
+                        if ($pos !== false) 
+                        {
+                            $caracteres = preg_split('/:/', $linea, -1, PREG_SPLIT_NO_EMPTY);
+                            if (count($caracteres)>= 2) 
+                            {
+                                $objClassConfiguracionEntidad->desencriptarClave($caracteres[1]);
+                            }           
+                        
+                        }
+        
+                    }
+                }
+            }    
+        }
+     return $objClassConfiguracionEntidad;  
+    }  
+}
 ?>
