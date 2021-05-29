@@ -31,8 +31,6 @@ class clsAdminBD
    public function desconectar($conexion)
    {
        mysqli_close($conexion);
-
-
    }
 }
 

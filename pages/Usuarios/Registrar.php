@@ -1,24 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sitio Nataly | Registro usuario</title>
-    <?php
-    include_once('../Templates/head.php');
-    ?>
-</head>
-
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <div class="content-wrapper">
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-2">
-                        </div>
-                        <div class="card-body register-card-body">
+<div class="card-body register-card-body">
                             <div class="row">
                                 <div class="col-2">
                                 </div>
@@ -125,20 +105,4 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.content-wrapper -->
-        <?php
-        include_once('../Templates/footer.php');
-        ?>
-    </div>
-    <?php
-    include_once('../Templates/Foot.php');
-    ?>
-</body>
-
-</html>
+                        
