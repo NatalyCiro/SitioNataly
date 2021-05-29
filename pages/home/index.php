@@ -13,7 +13,7 @@
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img  class ="animation__shake"  src="../../images/favicon.ico" alt="Logo" height="80" width="80">
+            <img class="animation__shake" src="../../images/favicon.ico" alt="Logo" height="80" width="80">
         </div>
 
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -33,37 +33,37 @@
                 </li>
             </ul>
         </nav>
- <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="../home/" class="brand-link">
-            <img src="../../images/favicon.ico" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .4">
-            <span class="brand-text font-weight-light">Sitio Nataly</span>
-        </a>
+                <img src="../../images/favicon.ico" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .4">
+                <span class="brand-text font-weight-light">Sitio Nataly</span>
+            </a>
 
-        <div class="sidebar">
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="../../images/images.png" alt="" class="img-circle elevation-2" alt="User Imagen"> 
-                </div>
-                <div class="info">
-                    <a href="../home/" class="d-block">Usuario</a>
+            <div class="sidebar">
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="../../images/images.png" alt="" class="img-circle elevation-2" alt="User Imagen">
+                    </div>
+                    <div class="info">
+                        <a href="../home/" class="d-block">Usuario</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form.control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                   </button>
+            <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form.control-sidebar" type="search" placeholder="Search" aria-label="search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
                 </div>
+                <?php
+                include_once('../Templates/menuSuperUsuario.php');
+                ?>
             </div>
-            <?php
-            include_once('../Templates/menuSuperUsuario.php');
-            ?>
-        </div>
-     </aside>
+        </aside>
         <div class="content-wrapper">
             <div class="content">
                 <div class="container-fluid">
@@ -71,15 +71,32 @@
                         <div class="col-2">
                         </div>
                         <?php
+                        if (isset($_GET['MsgType'])) {
+                            $tipoMensaje = $_GET['MsgType'];
+                            $mensaje  = isset($_GET['MsgValue']) ? $_GET['MsgValue'] : "";
+
+                            if ($tipoMensaje === "Err") {
+                                echo "<div class='lert alert-danger alert-dismissible container-fluid' role='alert'>
+                                  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                                  <h5><i class='icon fas fa-ban'></i> Error!</h5>" . $mensaje . "
+                                </div>";
+                            }
+
+                            if ($tipoMensaje === "Ext") {
+                                echo  "<div class='alert alert-success alert-dismissible'>
+                            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                            <h5><i class='icon fas fa-check'></i> Operación exitosa!</h5>" . $mensaje . "</div>";
+                            }
+                        }
                         if (isset($_GET['Op'])) {
-                            
+
                             $opcion = $_GET['Op'];
                             if ($opcion === "RUser") {
-                               include_once('../Usuarios/Registrar.php');
+                                include_once('../Usuarios/Registrar.php');
                             }
                         }
                         ?>
-                        
+
                         <div class="col-2">
                         </div>
                     </div>
@@ -87,9 +104,9 @@
             </div>
         </div>
         <!-- /.content-wrapper -->
-      <?php
-       include_once('../Templates/footer.php');
-      ?>
+        <?php
+        include_once('../Templates/footer.php');
+        ?>
     </div>
     <?php
     include_once('../Templates/Foot.php');

@@ -30,6 +30,3 @@ $objClassConfiguracionEntidad-> setearClave ($_POST['txtClave']);
 
 $objClsConfiguracion = new clsConfiguracion();
 $objClsConfiguracion->actualizarArchivo($objClassConfiguracionEntidad);
-
-
-?>
