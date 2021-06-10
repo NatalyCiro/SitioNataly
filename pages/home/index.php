@@ -88,6 +88,7 @@
                             <h5><i class='icon fas fa-check'></i> Operación exitosa!</h5>" . $mensaje . "</div>";
                             }
                         }
+                     
                         if (isset($_GET['Op'])) {
 
                             $opcion = $_GET['Op'];
@@ -95,6 +96,31 @@
                                 include_once('../Usuarios/Registrar.php');
                             }
                         }
+                        if (isset($_GET['Op'])) {
+
+                            $opc = $_GET['Op'];
+                            if ($opc === "RProductos") {
+                                include_once('../Productos/RegistrarProducto.php');
+                            }
+                        }
+                        if (isset($_GET['Op'])) {
+
+                            $opc = $_GET['Op'];
+                            if ($opc === "RCliente") {
+                                include_once('../Terceros/Clientes.php');
+                            }
+                        }
+                        if (isset($_GET['Op'])) {
+
+                            $opc = $_GET['Op'];
+                            if ($opc === "RProveedores") {
+                                include_once('../Terceros/Proveedores.php');
+                            }
+                        }
+                        
+                        
+                        
+
                         ?>
 
                         <div class="col-2">
