@@ -16,6 +16,36 @@ if (isset($_POST['txtOperacion'])) {
             EnviarMensajeError();
         }
     }
+    elseif($operacion === "InicioSesion")
+    {
+        $objClsUsuariosData = new clsUsuariosData();
+        $objClsUsuarioEntidad =  new clsUsuarioEntidad();
+        if (isset($_POST['txtUsuario'])) {
+            $objClsUsuarioEntidad->setearNombreUsuario($_POST['txtUsuario']);
+            if (isset($_POST['txtClave'])) {
+                $objClsUsuarioEntidad->setearClave($_POST['txtClave']);
+                $resultado = $objClsUsuariosData->autenticarusuario( $objClsUsuarioEntidad);
+                if (!$resultado) {
+
+                    $mensaje = "Ocurrio un error inesperado</br>Intente nuevamente...";
+                    header('Location:../?MsgType=Err&MsgValue=' . urldecode($mensaje));              
+                } 
+                else
+                {
+                    $mensaje = "Operación exitosa";                   
+                    session_start();
+                    $_SESSION['perfilUsuario']=$resultado[0];
+                    $_SESSION['tiempo']=time();
+                    header('Location:../pages/home/?MsgType=Ext&MsgValue=' . urldecode($mensaje));
+                  
+                }                
+            }else {
+    
+                EnviarMensajeError();
+            }
+        }
+
+    }
 } else {
     
     EnviarMensajeError();

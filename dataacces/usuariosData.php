@@ -22,6 +22,13 @@ class clsUsuariosData
 
     }
 
+    public function autenticarusuario($datos)
+    {
+       $sql="SELECT perfilUsuario FROM usuarios WHERE nombreUsuario='".$datos->obtenernombreUsuario()."'  
+       AND clave='".$datos->obtenerClave()."';";
+       return $this->objConsultas->cargarDatos($sql);
+    }
+
 
 }
 ?>

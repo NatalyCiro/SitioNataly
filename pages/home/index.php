@@ -60,7 +60,26 @@
                     </div>
                 </div>
                 <?php
-                include_once('../Templates/menuSuperUsuario.php');
+                session_start();
+                if (isset($_SESSION['perfilUsuario'])) 
+                {
+                    if ($_SESSION['perfilUsuario'] === '1') {
+                        include_once('../Templates/menuAdmin.php');
+                     }elseif ($_SESSION['perfilUsuario'] === '2') {
+                         include_once('../Templates/menuInventario.php');
+                     }elseif ($_SESSION['perfilUsuario'] === '3') {
+                         include_once('../Templates/menuVendedor.php');
+                      }elseif ($_SESSION['perfilUsuario'] === '4') {
+                         include_once('../Templates/menuSuperUsuario.php');
+                      }
+                }
+                else 
+                {
+                   // header('Location:../');
+                    
+                }
+              
+                
                 ?>
             </div>
         </aside>
@@ -76,7 +95,7 @@
                             $mensaje  = isset($_GET['MsgValue']) ? $_GET['MsgValue'] : "";
 
                             if ($tipoMensaje === "Err") {
-                                echo "<div class='lert alert-danger alert-dismissible container-fluid' role='alert'>
+                                echo "<div class='alert alert-danger alert-dismissible container-fluid' role='alert'>
                                   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
                                   <h5><i class='icon fas fa-ban'></i> Error!</h5>" . $mensaje . "
                                 </div>";
