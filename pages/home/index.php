@@ -114,12 +114,17 @@
                             if ($opcion === "RUser") {
                                 include_once('../Usuarios/Registrar.php');
                             }
+                          
                         }
                         if (isset($_GET['Op'])) {
 
                             $opc = $_GET['Op'];
                             if ($opc === "RProductos") {
                                 include_once('../Productos/RegistrarProducto.php');
+                            }
+                            else if ($opc === "CProductos"){
+                                include_once('../Productos/Listado.php');
+
                             }
                         }
                         if (isset($_GET['Op'])) {

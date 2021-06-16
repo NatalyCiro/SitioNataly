@@ -19,6 +19,12 @@ class clsproductoData
      return $this->objConsultas->actualizarEliminarInsertar($sql);
 
     }
+    public function listarProductos()
+    {
+        $sql = "SELECT codigoProducto, nombreProducto,marcaProducto, precioActual  FROM productos";
+        return $this->objConsultas->listado($sql);
+
+    } 
 
 
 }

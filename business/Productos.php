@@ -2,6 +2,7 @@
 include_once('../dataacces/productosData.php');
 include_once('../Entidades/Producto.php');
 
+
 if (isset($_POST['txtOperacion'])) {
     $operacion = $_POST['txtOperacion'];
     if ($operacion === "Registrar") {
@@ -17,8 +18,36 @@ if (isset($_POST['txtOperacion'])) {
         }
     }
 } else {
-    
-    EnviarMensajeError();
+
+    $objClsproductoData = new clsproductoData();
+    $resultado= $objClsproductoData->listarProductos();
+    if ($resultado != false) {
+        echo '<div class="card">
+        <div class="card-header">
+        <h3 class="card-title">Lista de productos</h3>
+        </div><div class="card-body"><table id="example1" class="table table-bordered"
+        <thead>
+        <tr>
+        <th> Codigo producto</th>
+        <th> Nombre producto</th>
+        <th> Marca</th>
+        <th> Precio </th>     
+        </tr>
+        </thead>
+        <tbody>';
+        foreach($resultado as $fila){
+            echo '<tr>';
+            for($i =0; $i < 4; $i++){
+               
+                echo '<td'.$fila[$i].'</td>';
+
+            }
+            echo '</tr>';
+        }
+        echo '</tbody> <table> 
+        </div></div>';
+        
+    }
 }
 function EnviarMensajeError()
 {

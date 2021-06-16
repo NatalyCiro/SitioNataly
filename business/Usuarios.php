@@ -46,9 +46,9 @@ if (isset($_POST['txtOperacion'])) {
         }
 
     }
-} else {
-    
+} else  {
     EnviarMensajeError();
+    
 }
 function EnviarMensajeError()
 {

@@ -17,7 +17,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href=""><b>Inicio de sesión</b>
+    <b>Inicio de sesión</b>
   </div>
   <!-- /.login-logo -->
   <?php
